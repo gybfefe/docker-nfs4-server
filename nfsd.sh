@@ -2,15 +2,19 @@
 
 set -e
 
+# disable expansion of * in strngs
+set -f
+
 if [ -z "${ALLOWED_CLIENTS}" ]; then
 	echo "Please set ALLOWED_CLIENTS"
 	exit 1
 fi
 
 > /etc/exports
-for CLIENT in "${ALLOWED_CLIENTS}"; do
+for CLIENT in ${ALLOWED_CLIENTS}; do
 	echo "/export ${CLIENT}(fsid=root,async,no_subtree_check,no_auth_nlm,insecure,no_root_squash)" >> /etc/exports
 done
+set +f
 
 # Make sure we react to these signals by running stop() when we see them - for clean shutdown
 # And then exiting
