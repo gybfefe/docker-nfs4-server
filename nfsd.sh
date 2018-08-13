@@ -12,7 +12,7 @@ fi
 
 > /etc/exports
 for CLIENT in ${ALLOWED_CLIENTS}; do
-	echo "/export ${CLIENT}(fsid=root,async,no_subtree_check,no_auth_nlm,insecure,no_root_squash)" >> /etc/exports
+	echo "/export ${CLIENT}(fsid=root,rw,async,no_subtree_check,no_auth_nlm,insecure,no_root_squash)" >> /etc/exports
 done
 set +f
 
